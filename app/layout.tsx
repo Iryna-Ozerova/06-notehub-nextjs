@@ -2,6 +2,8 @@ import TanStackProvider from "@/components/TanstackProvider/TanstackProvider";
 import Header from "@/components/Header/Header"
 import Footer from "@/components/Footer/Footer"
 
+import "./globals.css";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -12,9 +14,7 @@ export default function RootLayout({
       <body>
         <TanStackProvider>
           <Header />
-          <main>
           {children}
-          </main>
         <Footer />
         </TanStackProvider>
       </body>
