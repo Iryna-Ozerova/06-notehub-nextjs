@@ -6,10 +6,6 @@ import { useParams } from "next/navigation";
 
 import css from "./NoteDetails.module.css";
 
-type Props = {
-  id: number;
-};
-
 const NoteDetailsClient = () => {
 
   const params = useParams();
