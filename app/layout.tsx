@@ -1,4 +1,4 @@
-import TanStackProvider from "@/components/TanstackProvider/TanstackProvider";
+import TanStackProvider from "@/components/TanStackProvider/TanStackProvider"
 import Header from "@/components/Header/Header"
 import Footer from "@/components/Footer/Footer"
 
