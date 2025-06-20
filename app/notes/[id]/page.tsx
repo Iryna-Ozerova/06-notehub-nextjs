@@ -3,21 +3,21 @@ import { fetchNoteById } from "@/lib/api";
 import NoteDetailsClient from "./NoteDetailsClient";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: number }>;
 };
 
 const NoteDetails = async ({ params }: Props) => {
-  const noteId = Number(params.id);
+  const { id } = await params;
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["note", noteId],
-    queryFn: () => fetchNoteById(noteId),
+    queryKey: ["note", id],
+    queryFn: () => fetchNoteById(id),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NoteDetailsClient noteId={noteId}/>
+      <NoteDetailsClient id={id}/>
     </HydrationBoundary>
   );
 };
