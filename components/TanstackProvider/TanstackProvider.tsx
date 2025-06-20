@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+//git ignors register
+
 type Props = {
   children: React.ReactNode;
 };
