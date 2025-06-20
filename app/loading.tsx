@@ -1,8 +1,7 @@
 const Loading = () => {
-    return
-    <div>
+    return (
     <p>Loading, please wait...</p>
-    </div>
+    )
 }
 
 export default Loading;
