@@ -10,19 +10,35 @@ import NoteModal from "@/components/NoteModal/NoteModal";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
 
+import type { NotesResponse } from "@/types/note";
 import css from "./NotesPage.module.css";
 
-export default function NotesClient() {
+
+type NotesClientProps = {
+  initialPage: number;
+  initialSearch: string;
+  initialData: NotesResponse;
+};
+
+export default function NotesClient({
+  initialPage,
+  initialSearch,
+  initialData,
+}: NotesClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const [debounceSearchTerm] = useDebounce(searchTerm, 1000);
   const perPage = 12;
 
-  const { data } = useQuery({
+  const { data } = useQuery<NotesResponse>({
     queryKey: ["notes", debounceSearchTerm, currentPage],
     queryFn: () => fetchNotes(currentPage, debounceSearchTerm, perPage),
     placeholderData: keepPreviousData,
+    initialData:
+      currentPage === initialPage && debounceSearchTerm === initialSearch
+        ? initialData
+        : undefined,
   });
 
   const openModal = () => setIsModalOpen(true);
